@@ -1,0 +1,31 @@
+name: Lighthouse
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Builds the site against the CMS (secrets of the repository) and runs Lighthouse CI
+# on the built demo: performance, accessibility, best practices and SEO must score
+# 95 or more (lighthouserc.json), or the workflow fails.
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ASTRAL_URL: ${{ secrets.ASTRAL_URL }}
+      ASTRAL_PROJECT: ${{ secrets.ASTRAL_PROJECT }}
+      ASTRAL_TOKEN: ${{ secrets.ASTRAL_TOKEN }}
+      SITE_URL: http://localhost:3000
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build:next
+      - run: npm run check
+      - run: npx lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}

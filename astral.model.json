@@ -1,0 +1,274 @@
+{
+  "summary": "Site institucional com blog: página inicial e páginas montadas por blocos, posts com categorias e autores, configurações do site e dois menus. O mesmo modelo é usado por todos os toolkits Astral.",
+  "taxonomies": [
+    {
+      "apiId": "category",
+      "name": "Categorias",
+      "singularName": "Categoria",
+      "hierarchical": false,
+      "types": ["post"],
+      "urlPattern": "/blog/categoria/{slug}"
+    }
+  ],
+  "components": [
+    {
+      "apiId": "link",
+      "name": "Link",
+      "category": "base",
+      "description": "Um link com rótulo, usado por botões e redes sociais.",
+      "fields": [
+        { "apiId": "label", "label": "Rótulo", "type": "text", "required": true },
+        { "apiId": "url", "label": "URL", "type": "url", "required": true, "help": "Caminho interno (/contato) ou endereço completo." },
+        { "apiId": "newTab", "label": "Abrir em nova aba", "type": "boolean" }
+      ]
+    },
+    {
+      "apiId": "feature",
+      "name": "Destaque",
+      "category": "base",
+      "description": "Um item da lista de destaques.",
+      "fields": [
+        { "apiId": "icon", "label": "Ícone", "type": "select", "options": { "choices": [{ "value": "spark", "label": "Faísca" }, { "value": "layers", "label": "Camadas" }, { "value": "compass", "label": "Bússola" }, { "value": "shield", "label": "Escudo" }, { "value": "chart", "label": "Gráfico" }, { "value": "heart", "label": "Coração" }, { "value": "globe", "label": "Globo" }, { "value": "bolt", "label": "Raio" }] } },
+        { "apiId": "title", "label": "Título", "type": "text", "required": true },
+        { "apiId": "text", "label": "Texto", "type": "textarea" },
+        { "apiId": "link", "label": "Link", "type": "component", "options": { "component": "link" } }
+      ]
+    },
+    {
+      "apiId": "testimonial",
+      "name": "Depoimento",
+      "category": "base",
+      "description": "Uma citação com quem a disse.",
+      "fields": [
+        { "apiId": "quote", "label": "Citação", "type": "textarea", "required": true },
+        { "apiId": "name", "label": "Nome", "type": "text", "required": true },
+        { "apiId": "role", "label": "Cargo ou empresa", "type": "text" },
+        { "apiId": "photo", "label": "Foto", "type": "media", "options": { "accept": "image" } }
+      ]
+    },
+    {
+      "apiId": "faqitem",
+      "name": "Pergunta",
+      "category": "base",
+      "description": "Uma pergunta e sua resposta.",
+      "fields": [
+        { "apiId": "question", "label": "Pergunta", "type": "text", "required": true },
+        { "apiId": "answer", "label": "Resposta", "type": "richtext", "required": true }
+      ]
+    },
+    {
+      "apiId": "stat",
+      "name": "Número",
+      "category": "base",
+      "description": "Um número com legenda.",
+      "fields": [
+        { "apiId": "value", "label": "Valor", "type": "text", "required": true, "help": "Como deve aparecer: 120+, 98%, 12 anos." },
+        { "apiId": "label", "label": "Legenda", "type": "text", "required": true }
+      ]
+    },
+    {
+      "apiId": "hero",
+      "name": "Abertura",
+      "category": "seções",
+      "description": "A primeira dobra: chamada, título, texto, imagem e até dois botões.",
+      "fields": [
+        { "apiId": "eyebrow", "label": "Chamada curta", "type": "text", "help": "Uma linha pequena acima do título." },
+        { "apiId": "title", "label": "Título", "type": "text", "required": true },
+        { "apiId": "text", "label": "Texto", "type": "textarea" },
+        { "apiId": "image", "label": "Imagem", "type": "media", "options": { "accept": "image" } },
+        { "apiId": "primary", "label": "Botão principal", "type": "component", "options": { "component": "link" } },
+        { "apiId": "secondary", "label": "Botão secundário", "type": "component", "options": { "component": "link" } },
+        { "apiId": "align", "label": "Alinhamento", "type": "select", "options": { "choices": [{ "value": "start", "label": "À esquerda" }, { "value": "center", "label": "Centralizado" }], "default": "start" } }
+      ]
+    },
+    {
+      "apiId": "richtext",
+      "name": "Texto",
+      "category": "seções",
+      "description": "Texto formatado em coluna de leitura.",
+      "fields": [
+        { "apiId": "body", "label": "Conteúdo", "type": "richtext", "required": true },
+        { "apiId": "width", "label": "Largura", "type": "select", "options": { "choices": [{ "value": "narrow", "label": "Coluna de leitura" }, { "value": "wide", "label": "Larga" }], "default": "narrow" } }
+      ]
+    },
+    {
+      "apiId": "features",
+      "name": "Destaques",
+      "category": "seções",
+      "description": "Uma grade de destaques com ícone, título e texto.",
+      "fields": [
+        { "apiId": "title", "label": "Título", "type": "text" },
+        { "apiId": "text", "label": "Texto", "type": "textarea" },
+        { "apiId": "items", "label": "Itens", "type": "component", "required": true, "options": { "component": "feature", "repeatable": true } },
+        { "apiId": "columns", "label": "Colunas", "type": "select", "options": { "choices": [{ "value": "2", "label": "2" }, { "value": "3", "label": "3" }, { "value": "4", "label": "4" }], "default": "3" } }
+      ]
+    },
+    {
+      "apiId": "mediatext",
+      "name": "Imagem e texto",
+      "category": "seções",
+      "description": "Uma imagem ao lado de um texto, com link opcional.",
+      "fields": [
+        { "apiId": "title", "label": "Título", "type": "text", "required": true },
+        { "apiId": "text", "label": "Texto", "type": "richtext" },
+        { "apiId": "image", "label": "Imagem", "type": "media", "required": true, "options": { "accept": "image" } },
+        { "apiId": "imageSide", "label": "Lado da imagem", "type": "select", "options": { "choices": [{ "value": "start", "label": "Esquerda" }, { "value": "end", "label": "Direita" }], "default": "end" } },
+        { "apiId": "link", "label": "Link", "type": "component", "options": { "component": "link" } }
+      ]
+    },
+    {
+      "apiId": "gallery",
+      "name": "Galeria",
+      "category": "seções",
+      "description": "Uma grade de imagens.",
+      "fields": [
+        { "apiId": "title", "label": "Título", "type": "text" },
+        { "apiId": "images", "label": "Imagens", "type": "media", "required": true, "options": { "accept": "image", "multiple": true } },
+        { "apiId": "columns", "label": "Colunas", "type": "select", "options": { "choices": [{ "value": "2", "label": "2" }, { "value": "3", "label": "3" }], "default": "3" } }
+      ]
+    },
+    {
+      "apiId": "testimonials",
+      "name": "Depoimentos",
+      "category": "seções",
+      "description": "Citações de clientes.",
+      "fields": [
+        { "apiId": "title", "label": "Título", "type": "text" },
+        { "apiId": "items", "label": "Depoimentos", "type": "component", "required": true, "options": { "component": "testimonial", "repeatable": true } }
+      ]
+    },
+    {
+      "apiId": "faq",
+      "name": "Perguntas frequentes",
+      "category": "seções",
+      "description": "Perguntas e respostas em lista expansível.",
+      "fields": [
+        { "apiId": "title", "label": "Título", "type": "text" },
+        { "apiId": "text", "label": "Texto", "type": "textarea" },
+        { "apiId": "items", "label": "Perguntas", "type": "component", "required": true, "options": { "component": "faqitem", "repeatable": true } }
+      ]
+    },
+    {
+      "apiId": "logos",
+      "name": "Logos",
+      "category": "seções",
+      "description": "Uma fileira de logos de clientes ou parceiros.",
+      "fields": [
+        { "apiId": "title", "label": "Título", "type": "text" },
+        { "apiId": "logos", "label": "Logos", "type": "media", "required": true, "options": { "accept": "image", "multiple": true }, "help": "O texto alternativo de cada imagem é o nome da empresa." }
+      ]
+    },
+    {
+      "apiId": "stats",
+      "name": "Números",
+      "category": "seções",
+      "description": "Números que resumem resultados.",
+      "fields": [
+        { "apiId": "title", "label": "Título", "type": "text" },
+        { "apiId": "items", "label": "Números", "type": "component", "required": true, "options": { "component": "stat", "repeatable": true } }
+      ]
+    },
+    {
+      "apiId": "cta",
+      "name": "Chamada para ação",
+      "category": "seções",
+      "description": "Um convite com botão, em destaque.",
+      "fields": [
+        { "apiId": "title", "label": "Título", "type": "text", "required": true },
+        { "apiId": "text", "label": "Texto", "type": "textarea" },
+        { "apiId": "button", "label": "Botão", "type": "component", "required": true, "options": { "component": "link" } },
+        { "apiId": "tone", "label": "Tom", "type": "select", "options": { "choices": [{ "value": "neutral", "label": "Neutro" }, { "value": "accent", "label": "Destaque" }], "default": "accent" } }
+      ]
+    },
+    {
+      "apiId": "postlist",
+      "name": "Lista de posts",
+      "category": "seções",
+      "description": "Os posts mais recentes, com filtro opcional por categoria.",
+      "fields": [
+        { "apiId": "title", "label": "Título", "type": "text" },
+        { "apiId": "text", "label": "Texto", "type": "textarea" },
+        { "apiId": "limit", "label": "Quantidade", "type": "number", "options": { "integer": true, "min": 1, "max": 12, "default": 3 } },
+        { "apiId": "category", "label": "Categoria", "type": "text", "help": "O slug de uma categoria, para listar só ela." },
+        { "apiId": "live", "label": "Atualizar ao vivo", "type": "boolean", "help": "Busca a lista no navegador, sem esperar a próxima publicação do site." },
+        { "apiId": "link", "label": "Link para o blog", "type": "component", "options": { "component": "link" } }
+      ]
+    }
+  ],
+  "types": [
+    {
+      "apiId": "home",
+      "name": "Página inicial",
+      "kind": "SINGLE",
+      "description": "A página inicial, montada por blocos.",
+      "urlPattern": "/",
+      "seo": true,
+      "render": "static",
+      "fields": [
+        { "apiId": "blocks", "label": "Blocos", "type": "blocks", "required": true, "options": { "components": ["hero", "richtext", "features", "mediatext", "gallery", "testimonials", "faq", "logos", "stats", "cta", "postlist"] } }
+      ]
+    },
+    {
+      "apiId": "page",
+      "name": "Páginas",
+      "kind": "COLLECTION",
+      "description": "Páginas institucionais montadas por blocos.",
+      "urlPattern": "/{slug}",
+      "seo": true,
+      "render": "static",
+      "fields": [
+        { "apiId": "title", "label": "Título", "type": "text", "required": true },
+        { "apiId": "slug", "label": "Slug", "type": "slug", "required": true, "options": { "from": "title" } },
+        { "apiId": "blocks", "label": "Blocos", "type": "blocks", "options": { "components": ["hero", "richtext", "features", "mediatext", "gallery", "testimonials", "faq", "logos", "stats", "cta", "postlist"] } }
+      ]
+    },
+    {
+      "apiId": "post",
+      "name": "Posts",
+      "kind": "COLLECTION",
+      "description": "Artigos do blog, com categoria e autor.",
+      "urlPattern": "/blog/{slug}",
+      "seo": true,
+      "render": "revalidate",
+      "jsonLd": { "type": "BlogPosting", "map": { "headline": "title", "description": "excerpt", "image": "cover.url", "datePublished": "date", "dateModified": "meta.updatedAt", "author.name": "author.name" } },
+      "fields": [
+        { "apiId": "title", "label": "Título", "type": "text", "required": true },
+        { "apiId": "slug", "label": "Slug", "type": "slug", "required": true, "options": { "from": "title" } },
+        { "apiId": "excerpt", "label": "Resumo", "type": "textarea", "required": true, "options": { "maxLength": 300 } },
+        { "apiId": "cover", "label": "Capa", "type": "media", "required": true, "options": { "accept": "image" } },
+        { "apiId": "body", "label": "Conteúdo", "type": "richtext", "required": true },
+        { "apiId": "date", "label": "Data", "type": "date", "required": true },
+        { "apiId": "author", "label": "Autor", "type": "relation", "options": { "target": "author" } }
+      ]
+    },
+    {
+      "apiId": "author",
+      "name": "Autores",
+      "kind": "COLLECTION",
+      "description": "Quem assina os posts.",
+      "fields": [
+        { "apiId": "name", "label": "Nome", "type": "text", "required": true },
+        { "apiId": "photo", "label": "Foto", "type": "media", "options": { "accept": "image" } },
+        { "apiId": "bio", "label": "Bio", "type": "textarea" }
+      ]
+    },
+    {
+      "apiId": "settings",
+      "name": "Configurações do site",
+      "kind": "SINGLE",
+      "description": "Nome, logo, descrição, redes sociais e rodapé.",
+      "fields": [
+        { "apiId": "siteName", "label": "Nome do site", "type": "text", "required": true },
+        { "apiId": "logo", "label": "Logo", "type": "media", "options": { "accept": "image" } },
+        { "apiId": "description", "label": "Descrição", "type": "textarea", "help": "Usada como descrição padrão nas buscas e redes." },
+        { "apiId": "social", "label": "Redes sociais", "type": "component", "options": { "component": "link", "repeatable": true } },
+        { "apiId": "footerText", "label": "Texto do rodapé", "type": "textarea" },
+        { "apiId": "contactEmail", "label": "E-mail de contato", "type": "email" }
+      ]
+    }
+  ],
+  "menus": [
+    { "apiId": "header", "name": "Menu principal" },
+    { "apiId": "footer", "name": "Menu do rodapé" }
+  ]
+}
